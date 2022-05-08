@@ -27,7 +27,7 @@
                                 <div class="text-center">
                                     <h1 class="mb-1 text-white">Selamat Datang {{auth()->user()->name}},</h1>
                                     <p class="card-text m-auto w-75">
-                                        Selamat Datang di Aplikasi Pengujian Website Alternatif Pembelajaran
+                                        Selamat datang di aplikasi Web-test pengujian aplikasi web pembelajaran
                                     </p>
                                 </div>
                             </div>

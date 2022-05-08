@@ -94,10 +94,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($alterdata as $a)
+                                    @foreach ($rankwp[$u->id] as $ir => $r)
+                                    @php
+                                        $a = $alterdata->where('id', $ir)->first();
+                                    @endphp
                                         <tr>
-                                            <td>{{$rankwp[$u->id][$a->id]}}</td>
-                                            <td>{{$a->nama}}</td>
+                                            <td>{{$r}}</td>
+                                            <td>{{$a->nama}} ({{$a->id}})</td>
                                             @foreach ($kritdata as $k)
                                                 @php
                                                     try {

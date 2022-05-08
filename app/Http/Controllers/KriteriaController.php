@@ -99,59 +99,19 @@ class KriteriaController extends Controller
     }
 
 
-    private function pengeditan($req)
-    {
-        Kriteria::where('id', $req->idedit)->update([
-            'id' => $req->id,
-            'nama' => $req->nama,
-            'bobot' => $req->bobot,
-            'jenis' => $req->jenis
-        ]);
-    }
+
     public function editkriteria(Request $req)
     {
         try {
-            // dd(Subkriteria::where('id_kriteria', $req->idedit)->get());
-            if (($req->id != $req->idedit)){
-                $validate = Kriteria::where('id', $req->id)->first();
-                if ($validate == null){
-                    $subs = Subkriteria::where('id_kriteria', $req->idedit)->get();
-
-                    Kriteria::create([
-                        'id' => '99',
-                        'nama' => 'temp',
-                        'bobot' => '1',
-                        'jenis' => 'cost'
-                    ]);
-
-                    foreach ($subs as $sub) {
-                        $sub->update([
-                            'id_kriteria' => '99'
-                        ]);
-                    }
-
-                    KriteriaController::pengeditan($req);
-
-                    foreach ($subs as $sub) {
-                        $sub->update([
-                            'id_kriteria' => $req->id
-                        ]);
-                    }
-
-                    Kriteria::where('id', '99')->delete();
-
-                }else {
-                    KriteriaController::pengeditan($req);
-                }
-            }
-            else {
-                KriteriaController::pengeditan($req);
-            }
-
+            Kriteria::where('id', $req->idedit)->update([
+                'nama' => $req->nama,
+                'bobot' => $req->bobot,
+                'jenis' => $req->jenis
+            ]);
             return back()->with('success', 'Kriteria Berhasil Diedit.');
 
         }catch (Exception $e) {
-            return back()->with('error', 'Maaf, ID Telah Tersedia');
+            return back()->with('error', 'Maaf, Terdapat Kesalahan');
         }
 
     }

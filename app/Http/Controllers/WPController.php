@@ -14,17 +14,29 @@ class WPController extends Controller
 
     function array_rank( $in ) {
     $x = $in; arsort($x);
-     $rank       = 0;
+    $rank       = 0;
     $hiddenrank = 0;
     $hold = null;
     foreach ( $x as $key=>$val ) {
         $hiddenrank += 1;
+        $rank = $hiddenrank;
         if ( is_null($hold) || $val < $hold ) {
-            $rank = $hiddenrank; $hold = $val;
+            $hold = $val;
         }
         $in[$key] = $rank;
     }
     return $in;
+    }
+
+    function reverse_rank( $in ) {
+        $k = array_keys($in);
+        $v = array_values($in);
+
+        $rv = array_reverse($v);
+
+        $b = array_combine($k, $rv);
+
+        return $b;
     }
 
     public function WPOWA()
@@ -77,18 +89,24 @@ class WPController extends Controller
                 $vectorwp[$u->id][$a->id] = 0;
                 foreach ($kritdata as $k) {
                     try {
-                        $kritnilai = $nilaiuser->where('id_alternatif', $a->id)->where('id_kriteria', $k->id)->first()->nilai;
+                        $kritnilai[$u->id][$a->id][$k->id] = $nilaiuser->where('id_alternatif', $a->id)->where('id_kriteria', $k->id)->first()->nilai;
                     } catch (\Throwable $th) {
-                        $kritnilai = 0;
+                        $kritnilai[$u->id][$a->id][$k->id] = 0;
                     }
+                    // $vects[$u->id][$a->id][$k->id] = pow($kritnilai[$u->id][$a->id][$k->id], $bobot[$k->id]);
                     if ($vectorwp[$u->id][$a->id] == 0) {
-                        $vectorwp[$u->id][$a->id] = pow($kritnilai, $bobot[$k->id]);
+                        $vectorwp[$u->id][$a->id] = pow($kritnilai[$u->id][$a->id][$k->id], $bobot[$k->id]);
                     } else {
-                        $vectorwp[$u->id][$a->id] = $vectorwp[$u->id][$a->id]*(pow($kritnilai, $bobot[$k->id]));
+                        $vectorwp[$u->id][$a->id] = $vectorwp[$u->id][$a->id]*(pow($kritnilai[$u->id][$a->id][$k->id], $bobot[$k->id]));
                     }
                 }
             }
-            $sumvectors = array_sum($vectorwp[$u->id]);
+
+            try {
+                $sumvectors = array_sum($vectorwp[$u->id]);
+            } catch (\Throwable $th) {
+                return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
+            }
                 //part 5 wp (Perhitungan Preferensi Relatif[Vektor V])
             foreach ($alterdata as $a) {
                 $prefwp[$u->id][$a->id] = 0;
@@ -107,7 +125,15 @@ class WPController extends Controller
                 }
             }
             //wp ranking $wprank[id]
-            $wprank[$u->id] = WPController::array_rank($prefwp[$u->id]);
+            try{
+                $wprank[$u->id] = WPController::array_rank($prefwp[$u->id]);
+                asort($wprank[$u->id]);
+                $wprank[$u->id] = WPController::reverse_rank($wprank[$u->id]);
+                ksort($wprank[$u->id]);
+                // dd($wprank, $prefwp);
+            } catch (\Throwable $th) {
+                return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
+            }
 
             // MULAI OWA
 
@@ -115,18 +141,31 @@ class WPController extends Controller
             //owa pij array $owapij[id gid][i][j]
             foreach ($alterdata as $a) {
                 foreach ($alterdata as $wp) {
+                    try {
                     $owapij[$u->id][$a->id][$wp->id] = 0.5*(1+($wprank[$u->id][$wp->id]/($altercount-1))-($wprank[$u->id][$a->id]/($altercount-1)));
+                    } catch (\Throwable $th) {
+                        return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
+                    }
                     // dd($wprank[$u->id][$a->id]/($altercount-1));
                 }
             }
 
 
             //aggegasi preferensi owa untuk gdm
+            try {
             $wowa[$u->id] = (sqrt($gdmidsort[$u->id]/$gdmcount))-(sqrt(($gdmidsort[$u->id]-1)/$gdmcount));
+            } catch (\Throwable $th) {
+                return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
+            }
+
 
             //pengambilan nilai pij[1][3] untuk di ranking
             foreach ($alterdata as $a) {
-                $pij13[$u->id] = $owapij[$u->id][1][3];
+                try {
+                $pij13[$u->id] = $owapij[$u->id][1][$altercount];
+                } catch (\Throwable $th) {
+                    return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
+                }
             }
 
         }
@@ -151,7 +190,7 @@ class WPController extends Controller
         //pengubahan setiap p13 menjadi p13 yang sudah diranking
         $powarank = $powa;
         foreach ($gdm as $i => $u) {
-            $powarank[$u->id][1][3] = $pij13[$i];
+            $powarank[$u->id][1][$altercount] = $pij13[$i];
         }
 
         //perkalian setiap w per gdm dengan setiap p
@@ -210,7 +249,8 @@ class WPController extends Controller
 
         $qgddrank = $QGDD;
         asort($qgddrank);
-        // dd($qgddrank);
+        // dd($wprank, $prefwp);
+
 
         return view('auth.owa', [
 

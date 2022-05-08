@@ -72,7 +72,7 @@ class AlternatifController extends Controller
         try {
             Alternatif::create([
                 'id' => $req->id,
-                'nama' => $req->nama,
+                'nama' => $req->nama
             ]);
             return back()->with('success', 'Alternatif Berhasil Dibuat.');
         } catch (Exception $e) {
@@ -104,9 +104,9 @@ class AlternatifController extends Controller
                 'id' => $req->id,
                 'nama' => $req->nama,
             ]);
-            return back()->with('success', 'Kriteria Berhasil Diedit.');
+            return back()->with('success', 'Alternatif Berhasil Diedit.');
         } catch (Exception $e) {
-            return back()->with('error', 'Maaf, ID Telah Tersedia');
+            return back()->with('error', 'Maaf,ID Alternatif Tidak Dapat Diubah');
         }
     }
 

@@ -148,12 +148,7 @@
             <form action="kriteria/edit" method="post">
                 @csrf
                 <div class="modal-body">
-                    <label>Id Kriteria: </label>
-                    <input type="text" name="idedit" placeholder="Id Kriteria" value="{{$krd->id}}" class="form-control" hidden>
-                    <div class="mb-1">
-                        <input type="number" name="id" class="touchspin-min-max" value="{{$krd->id}}"/>
-                    </div>
-
+                    <input type="text" name="idedit" value="{{$krd->id}}" hidden>
                     <label>Nama Kriteria: </label>
                     <div class="mb-1">
                         <input type="text" name="nama" placeholder="Nama Kriteria" value="{{$krd->nama}}" class="form-control" />

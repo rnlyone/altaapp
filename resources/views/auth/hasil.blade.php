@@ -79,9 +79,9 @@
                                 use App\Http\Controllers\WPController;
                                 $rank = WPController::array_rank($QGDD)
                             @endphp
-                            <p>Solusi akhir diperoleh alternatif terbaik adalah aplikasi web pembelajaran <span class="fw-bolder">{{$alterdata->where('id', $rank[3])->first()->nama}}</span>
+                            <p>Solusi akhir diperoleh alternatif terbaik adalah aplikasi web pembelajaran <span class="fw-bolder">{{$alterdata->where('id', $rank[$altercount])->first()->nama}}</span>
                                 karena memiliki nilai terkecil atau terdapat kesalahan yang minim setelah dilakukan pengujian aplikasi web sehingga disimpulkan bahwa aplikasi web pembelajaran
-                                <span class="fw-bolder">{{$alterdata->where('id', $rank[3])->first()->nama}}</span> di rekomendasikan ke pihak sekolah. </p>
+                                <span class="fw-bolder">{{$alterdata->where('id', $rank[$altercount])->first()->nama}}</span> di rekomendasikan ke pihak sekolah. </p>
                         </div>
                     </div>
                 </div>
