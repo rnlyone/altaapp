@@ -77,7 +77,8 @@
                             </div>
                             @php
                                 use App\Http\Controllers\WPController;
-                                $rank = WPController::array_rank($QGDD)
+                                $rank = WPController::array_rank($QGDD);
+                                $rank = array_flip($rank)
                             @endphp
                             <p>Solusi akhir diperoleh alternatif terbaik adalah aplikasi web pembelajaran <span class="fw-bolder">{{$alterdata->where('id', $rank[$altercount])->first()->nama}}</span>
                                 karena memiliki nilai terkecil atau terdapat kesalahan yang minim setelah dilakukan pengujian aplikasi web sehingga disimpulkan bahwa aplikasi web pembelajaran

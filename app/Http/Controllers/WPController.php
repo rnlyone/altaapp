@@ -251,6 +251,7 @@ class WPController extends Controller
 
         $qgddrank = $QGDD;
         asort($qgddrank);
+        // ksort($qgddrank);
         // dd($wprank, $prefwp);
 
 
