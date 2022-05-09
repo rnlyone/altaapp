@@ -79,7 +79,7 @@ class UserController extends Controller
 
     public function store(Request $r)
     {
-        // dd($r->role);
+        // dd($r->id);
         try {
 
             $validationstore = request()->validate([

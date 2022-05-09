@@ -112,7 +112,7 @@
                                                 <td>{{$kritnilai}}</td>
                                             @endforeach
 
-                                            <td>@if ($wp[$u->id][$a->id] == INF)
+                                            <td>@if ($wp[$u->id][$a->id] == NAN)
                                                 0
                                             @else
                                                 {{$wp[$u->id][$a->id]}}

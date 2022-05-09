@@ -124,13 +124,15 @@ class WPController extends Controller
                     }
                 }
             }
+
             //wp ranking $wprank[id]
             try{
+                asort($prefwp[$u->id]);
                 $wprank[$u->id] = WPController::array_rank($prefwp[$u->id]);
                 asort($wprank[$u->id]);
                 $wprank[$u->id] = WPController::reverse_rank($wprank[$u->id]);
+                $wprank[$u->id] = array_flip($wprank[$u->id]);
                 ksort($wprank[$u->id]);
-                // dd($wprank, $prefwp);
             } catch (\Throwable $th) {
                 return back()->with('Error', 'Maaf, Halaman tersebut belum bisa diakses karena data belum siap.');
             }
@@ -159,7 +161,7 @@ class WPController extends Controller
             }
 
 
-            //pengambilan nilai pij[1][3] untuk di ranking
+            //pengambilan nilai pij[1][$altercount] untuk di ranking
             foreach ($alterdata as $a) {
                 try {
                 $pij13[$u->id] = $owapij[$u->id][1][$altercount];
@@ -224,6 +226,7 @@ class WPController extends Controller
         foreach ($alterdata as $ia => $a) {
             foreach ($alterdata as $iwp => $wp) {
                 $pcqgdd[$a->id][$wp->id] = $nilaipc[$a->id][$wp->id] / ($nilaipc[$a->id][$wp->id] + $nilaipc[$wp->id][$a->id]);
+                // dd($nilaipc);
             }
         }
         // dd($pcqgdd, $nilaipc);
@@ -236,12 +239,11 @@ class WPController extends Controller
 
         //final step QGDD
         foreach ($alterdata as $ia => $a) {
-            $varbantu = null;
+            $varbantu = 0;
             foreach ($alterdata as $iwp => $wp) {
-                try {
-                    $varbantu += $alterwowa[$a->id] * $pcqgdd[$a->id][$wp->id];
-                } catch (\Throwable $th) {
-                    $varbantu = $alterwowa[$a->id] * $pcqgdd[$a->id][$wp->id];
+                $varbantu += ($alterwowa[$wp->id] * $pcqgdd[$a->id][$wp->id]);
+                if ($ia == 1 &&$iwp == 0) {
+                    // dd($varbantu, $alterwowa[$wp->id], $pcqgdd[$a->id][$wp->id], $pcqgdd, $alterwowa);
                 }
             }
             $QGDD[$a->id] = $varbantu;
