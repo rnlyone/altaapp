@@ -169,19 +169,6 @@
                                 />
                                 <label class="form-check-label" for="idguru">Guru</label>
                               </div>
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="role"
-                                  id="idmhs"
-                                  value="mhs"
-                                  @if ($usd->role == "mhs")
-                                    checked
-                                  @endif
-                                />
-                                <label class="form-check-label" for="idmhs">Mahasiswa Kampus Mengajar</label>
-                              </div>
                         </div>
                     </div>
                 </div>
@@ -288,19 +275,6 @@
                                   @endif
                                 />
                                 <label class="form-check-label" for="idguru">Guru</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  name="role"
-                                  id="idmhs"
-                                  value="mhs"
-                                  @if ($usd->role == "mhs")
-                                    checked
-                                  @endif
-                                />
-                                <label class="form-check-label" for="idmhs">Mahasiswa Kampus Mengajar</label>
                               </div>
                         </div>
                     </div>

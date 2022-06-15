@@ -166,7 +166,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <p class="text-center mt-2">
           <span>Lupa Password?</span>
-          <a href="page-auth-register-v1.html">
+          <a href="https://wa.me/62895800472767">
             <span>Kontak Kami</span>
           </a>
         </p>

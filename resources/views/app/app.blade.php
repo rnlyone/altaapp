@@ -96,16 +96,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user"><a
-                            class="dropdown-item" href="page-profile.html"><i class="me-50" data-feather="user"></i>
-                            Profile</a><a class="dropdown-item" href="app-email.html"><i class="me-50"
-                                data-feather="mail"></i> Inbox</a><a class="dropdown-item" href="app-todo.html"><i
-                                class="me-50" data-feather="check-square"></i> Task</a><a class="dropdown-item"
-                            href="app-chat.html"><i class="me-50" data-feather="message-square"></i> Chats</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item"
-                            href="page-account-settings.html"><i class="me-50" data-feather="settings"></i>
-                            Settings</a><a class="dropdown-item" href="page-pricing.html"><i class="me-50"
-                                data-feather="credit-card"></i> Pricing</a><a class="dropdown-item"
-                            href="page-faq.html"><i class="me-50" data-feather="help-circle"></i> FAQ</a><a
                             class="dropdown-item" href="logout"><i class="me-50"
                                 data-feather="power"></i> Logout</a>
                     </div>
@@ -315,42 +305,6 @@ License: You must have a valid license purchased only from themeforest(the above
                     data-i18n="Data Hasil Akhir">Data Hasil Akhir</span></a>
                 </li>
                 @endif
-
-                <li class=" navigation-header"><span data-i18n="Misc">Misc Data</span><i
-                        data-feather="more-horizontal"></i>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="menu"></i><span
-                            class="menu-title text-truncate" data-i18n="Menu Levels">Menu Levels</span></a>
-                    <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate" data-i18n="Second Level">Second Level 2.1</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate" data-i18n="Second Level">Second Level 2.2</span></a>
-                            <ul class="menu-content">
-                                <li><a class="d-flex align-items-center" href="#"><span class="menu-item text-truncate"
-                                            data-i18n="Third Level">Third Level 3.1</span></a>
-                                </li>
-                                <li><a class="d-flex align-items-center" href="#"><span class="menu-item text-truncate"
-                                            data-i18n="Third Level">Third Level 3.2</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="disabled nav-item"><a class="d-flex align-items-center" href="#"><i
-                            data-feather="eye-off"></i><span class="menu-title text-truncate"
-                            data-i18n="Disabled Menu">Disabled Menu</span></a>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center"
-                        href=""
-                        target="_blank"><i data-feather="folder"></i><span class="menu-title text-truncate"
-                            data-i18n="Documentation">Documentation</span></a>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""
-                        target="_blank"><i data-feather="life-buoy"></i><span class="menu-title text-truncate"
-                            data-i18n="Raise Support">Raise Support</span></a>
-                </li>
             </ul>
         </div>
     </div>
