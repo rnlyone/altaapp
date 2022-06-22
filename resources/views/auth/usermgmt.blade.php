@@ -93,6 +93,7 @@
     </div>
 </div>
 
+
 {{-- MODAL --}}
 @foreach ($userdata as $usd)
 <div class="modal fade text-start" id="modaledit{{$usd->id}}" tabindex="-1" aria-labelledby="myModalLabel1"
@@ -320,7 +321,7 @@
                 },
 
                 columns : [
-                    {data: 'id'},
+                    {data: 'DT_RowIndex'},
                     {data: 'name'},
                     {data: 'email'},
                     {data: 'role'},
