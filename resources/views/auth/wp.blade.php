@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <!-- list section start -->
-                @foreach ($gdm as $u)
+                @foreach ($gdm as $i => $u)
                 @php
                         try {
                             $nilaiuser = $nilaidata->where('id_user', $u->id);
@@ -75,7 +75,7 @@
                         <div style="margin: 10pt">
                         <div class="card-datatable table-responsive pt-0">
                             <div class="card-header p-0">
-                                <div class="head-label"><h5 class="mt-1">Matrix GDM {{$u->id}} | {{$u->name}} | {{$u->role}}</h5></div>
+                                <div class="head-label"><h5 class="mt-1">Matrix GDM {{$i+1}} | {{$u->name}} | {{$u->role}}</h5></div>
                                 <div class="dt-action-buttons text-end">
                                 </div>
                             </div>
