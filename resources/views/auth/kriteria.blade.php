@@ -29,6 +29,16 @@
             <!-- Dashboard Analytics Start -->
             <section class="app-user-list">
                 <!-- list section start -->
+                @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Error</h4>
+                    <div class="alert-body">
+                        {{$error}}
+                    </div>
+                  </div>
+                @endforeach
+                @endif
                 <div class="card">
                     <div style="margin: 10pt">
                         <div class="card-datatable table-responsive pt-0">
@@ -103,7 +113,7 @@
 
                     <label>Bobot Kriteria: </label>
                     <div class="mb-1">
-                        <input type="number" name="bobot" class="touchspin-min-max" value="1"/>
+                        <input type="number" name="bobot" class="touchspin-min-maxkrit" value="1"/>
                     </div>
 
                     <label>Jenis Kriteria: </label>
@@ -156,7 +166,7 @@
 
                     <label>Bobot Kriteria: </label>
                     <div class="mb-1">
-                        <input type="number" name="bobot" class="touchspin-min-max" value="{{$krd->bobot}}"/>
+                        <input type="number" name="bobot" class="touchspin-min-maxkrit" min="0" max="5" value="{{$krd->bobot}}"/>
                     </div>
 
                     <label>Jenis Kriteria: </label>

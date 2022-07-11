@@ -45,6 +45,13 @@ class SubkriteriaController extends Controller
      */
     public function  store(Request $req)
     {
+        $req->validate([
+            'nama' => [
+                'regex:/^[a-zA-Z]+$/u',
+                'unique:App\Models\Subkriteria,nama'
+            ]
+        ]);
+
         try {
             Subkriteria::create([
                 'id_kriteria' => $req->id_kriteria,

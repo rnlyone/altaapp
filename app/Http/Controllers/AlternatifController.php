@@ -69,6 +69,12 @@ class AlternatifController extends Controller
      */
     public function store(Request $req)
     {
+        $req->validate([
+            'nama' => [
+                'unique:App\Models\Alternatif,nama'
+            ]
+        ]);
+
         try {
             Alternatif::create([
                 'id' => $req->id,
@@ -76,7 +82,7 @@ class AlternatifController extends Controller
             ]);
             return back()->with('success', 'Alternatif Berhasil Dibuat.');
         } catch (Exception $e) {
-            return back()->with('error', 'Maaf, Terdapat Kesalahan');
+            return back()->with('error', 'Maaf, Terdapat Kesalahan', $e);
         }
     }
 

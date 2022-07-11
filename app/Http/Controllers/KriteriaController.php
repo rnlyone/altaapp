@@ -74,6 +74,13 @@ class KriteriaController extends Controller
      */
     public function store(Request $req)
     {
+        $req->validate([
+            'nama' => [
+                'regex:/^[a-zA-Z]+$/u',
+                'unique:App\Models\Kriteria,nama'
+            ]
+        ]);
+
         try {
             Kriteria::create([
                 'id' => $req->id,
